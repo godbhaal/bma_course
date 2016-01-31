@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 /**
  * Created by jon on 29/01/16.
  */
-public class Fragment_login extends Fragment {
+public class FragmentLogin extends Fragment {
 
-    public static Fragment_login newInstance(){
+    public static FragmentLogin newInstance(){
         Bundle args = new Bundle();
-        Fragment_login fragment = new Fragment_login();
+        FragmentLogin fragment = new FragmentLogin();
         fragment.setArguments(args);
         return fragment;
     }
@@ -22,7 +22,7 @@ public class Fragment_login extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_fragment0, container, false);
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
         return view;
     }
 }

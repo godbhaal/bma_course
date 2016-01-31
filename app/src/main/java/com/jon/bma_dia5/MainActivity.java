@@ -1,8 +1,6 @@
 package com.jon.bma_dia5;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -10,7 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -43,36 +40,12 @@ public class MainActivity extends AppCompatActivity
         // Buscar la toolbar nova i la marquem com a principal
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // botó d'accio rapida
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Toast.makeText(MainActivity.this, "aixo es el toast", Toast.LENGTH_LONG).show();
-
-                            }
-                        }).show();
-            }
-        });
 
         setupFAB();
         setupNavigationView();
         setupTabs();
     }
 
-    // Configuracio de les pestanyes
-    public void setupTabs() {
-        fm = getSupportFragmentManager();
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
-        viewPager.setAdapter(new MyFragmentAdapter(fm, getBaseContext()));
-
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.setupWithViewPager(viewPager);
-    }
 
     // Setup del Floating Action Button
     public void setupFAB() {
@@ -84,14 +57,12 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(MainActivity.this, "aixo es el toast", Toast.LENGTH_LONG).show();
-
+                                Toast.makeText(MainActivity.this, "Toast", Toast.LENGTH_LONG).show();
                             }
                         }).show();
             }
         });
     }
-
 
     public void setupNavigationView() {
         // Barra de navegacio (icona |||)
@@ -108,7 +79,7 @@ public class MainActivity extends AppCompatActivity
 
         // Agafa la capçalera del navView per modificarlo
         View view = navigationView.getHeaderView(0);
-        TextView textView = (TextView) view.findViewById(R.id.textView);
+        TextView textView = (TextView) view.findViewById(R.id.textview_header2);
         textView.setText("unaltre@mail.com");
     }
 
@@ -129,7 +100,16 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    // Configuracio de les pestanyes
+    public void setupTabs() {
+        fm = getSupportFragmentManager();
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPager.setAdapter(new MyFragmentAdapter(fm, getBaseContext()));
+
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

@@ -13,15 +13,15 @@ import android.widget.TextView;
 /**
  * Created by jon on 29/01/16.
  */
-public class Fragment_textview extends Fragment {
+public class FragmentTextview extends Fragment {
 
     private Boolean st;
     private SharedPreferences sharedPref;
     private TextView textView;
 
-    public static Fragment_textview newInstance(){
+    public static FragmentTextview newInstance(){
         Bundle args = new Bundle();
-        Fragment_textview fragment = new Fragment_textview();
+        FragmentTextview fragment = new FragmentTextview();
         fragment.setArguments(args);
         return fragment;
     }
@@ -29,7 +29,7 @@ public class Fragment_textview extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_fragment1, container, false);
+        View view = inflater.inflate(R.layout.fragment_textview, container, false);
         return view;
     }
 
@@ -37,7 +37,7 @@ public class Fragment_textview extends Fragment {
     public void onResume() {
         super.onResume();
         sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
-        textView = (TextView) getActivity().findViewById(R.id.textView3);
+        textView = (TextView) getActivity().findViewById(R.id.textview_fragment_textview1);
         st = sharedPref.getBoolean("pref_1", true);
         textView.setText(st.toString());
     }

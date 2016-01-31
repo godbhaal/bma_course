@@ -40,8 +40,8 @@ public class MySpinnerAdapter implements SpinnerAdapter {
         // indicar parent pq pugui calcular els tamanys  bé
         View view = inflater.inflate(resId, parent, false);
 
-        TextView tv_title = (TextView) view.findViewById(R.id.spinner_textview1);
-        TextView tv_header = (TextView) view.findViewById(R.id.spinner_textview2);
+        TextView tv_title = (TextView) view.findViewById(R.id.textview_spinner1);
+        TextView tv_header = (TextView) view.findViewById(R.id.textview_spinner2);
         tv_title.setText(titles[position]);
         tv_header.setText(headers[position]);
 

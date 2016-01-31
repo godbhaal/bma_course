@@ -1,7 +1,6 @@
 package com.jon.bma_dia5;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +9,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,27 +34,27 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
     public MyFragmentAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
-        fragments.add(Fragment_login.newInstance());     // posicio 0
+        fragments.add(FragmentLogin.newInstance());
         titles.add("Login");
 
-        fragments.add(Fragment_textview.newInstance());     // posicio 1
+        fragments.add(FragmentTextview.newInstance());
         titles.add("Check");
 
-        fragments.add(Fragment_spinner.newInstance());
+        fragments.add(FragmentSpinner.newInstance());
         titles.add("Spinner");
 
-        fragments.add(Fragment_crono.newInstance());
+        fragments.add(FragmentCrono.newInstance());
         titles.add("Crono");
 
-        fragments.add(Fragment_login.newInstance());     // posicio 0
-        titles.add("Login");
+        fragments.add(RecyclerViewFragment.newInstance());
+        titles.add("Recycler");
     }
 
 
     // Per renombrar els tituls del tab
 //    @Override
 //    public CharSequence getPageTitle(int position) {
-//        return titles.get(position);
+//        return tvr_titles.get(position);
 //    }
 
     @Override

@@ -14,23 +14,23 @@
     tools:showIn="@layout/app_bar_main">
 
     <TextView
+        android:id="@+id/textview_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/login"/>
+        android:text="Login" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/usernameWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/login">
+        android:layout_below="@id/textview_login">
 
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/textview_login_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Username"/>
+            android:hint="Username"
+            android:inputType="textPersonName" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -41,11 +41,11 @@
         android:layout_below="@id/usernameWrapper">
 
         <EditText
-            android:id="@+id/emailname"
+            android:id="@+id/textview_login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:hint="Email" />
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
 
     </android.support.design.widget.TextInputLayout>
 
