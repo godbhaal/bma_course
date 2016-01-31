@@ -26,7 +26,6 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
 
         fragments.add(Fragment2.newInstance());
         titles.add("Fragment 2");
-        // NOU COMMENTARI
     }
 
 
