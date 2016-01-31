@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Created by jon on 29/01/16. Adaptador per asociar els fragments al viewPager
  */
+//public class MyFragmentAdapter extends FragmentPagerAdapter {
 public class MyFragmentAdapter extends FragmentPagerAdapter {
 
     // Recomanacio, afegir els fragments a un array list (son mes facils de manejar)
@@ -18,17 +19,29 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
 
     public MyFragmentAdapter(FragmentManager fm) {
         super(fm);
-        fragments.add(Fragment0.newInstance());     // posicio 0
+        fragments.add(Fragment_login.newInstance());     // posicio 0
         titles.add("Login");
 
-        fragments.add(Fragment1.newInstance());     // posicio 1
+        fragments.add(Fragment_textview.newInstance());     // posicio 1
         titles.add("Check");
 
-        fragments.add(Fragment2.newInstance());
+        fragments.add(Fragment_spinner.newInstance());
         titles.add("Spinner");
 
         fragments.add(Fragment_crono.newInstance());
         titles.add("Crono");
+
+        fragments.add(Fragment_textview.newInstance());     // posicio 1
+        titles.add("Check");
+
+        fragments.add(Fragment_textview.newInstance());     // posicio 1
+        titles.add("Check");
+
+        fragments.add(Fragment_textview.newInstance());     // posicio 1
+        titles.add("Check");
+
+        fragments.add(Fragment_textview.newInstance());     // posicio 1
+        titles.add("Check");
     }
 
 

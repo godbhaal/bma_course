@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 /**
  * Created by jon on 29/01/16.
  */
-public class Fragment0 extends Fragment {
+public class Fragment_login extends Fragment {
 
-    public static Fragment0 newInstance(){
+    public static Fragment_login newInstance(){
         Bundle args = new Bundle();
-        Fragment0 fragment = new Fragment0();
+        Fragment_login fragment = new Fragment_login();
         fragment.setArguments(args);
         return fragment;
     }

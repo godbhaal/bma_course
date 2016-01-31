@@ -24,10 +24,13 @@
         <!-- ?attr/.... es per buscar un parametre predefinit -->
         <!-- Si es vol els noms amb minuscula (no recomanat per les normes d'estil) afegir la seguent linia
         app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"/> -->
+        <!-- Si son pocs elements, desactivar 'tabMode=scrollable' pq siguin fix-->
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"/>
+            android:layout_height="?attr/actionBarSize"
+            app:tabMode="scrollable" />
+
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_main" />
