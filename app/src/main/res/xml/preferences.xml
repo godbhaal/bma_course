@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Settings">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_1"
+            android:summary="Preference1"
+            android:title="Pref1" />
+
+        <ListPreference
+            android:defaultValue="@string/pref_syncConnectionTypes_default"
+            android:dependency="pref_1"
+            android:dialogTitle="dialog title"
+            android:entries="@array/entries"
+            android:entryValues="@array/values"
+            android:key="pref_11"
+            android:title="title" />
+    </PreferenceCategory>
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="pref_theme"
+        android:title="Red Theme"/>
+
+</PreferenceScreen>

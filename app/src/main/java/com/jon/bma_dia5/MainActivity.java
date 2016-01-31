@@ -1,5 +1,8 @@
 package com.jon.bma_dia5;
 
+import android.annotation.TargetApi;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity
     private TabLayout tabLayout;
     // Per el boto que obre el navView
     private ActionBarDrawerToggle mDrawerToggle;
+    private FragmentManager fm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +65,7 @@ public class MainActivity extends AppCompatActivity
 
     // Configuracio de les pestanyes
     public void setupTabs() {
-        FragmentManager fm = getSupportFragmentManager();
+        fm = getSupportFragmentManager();
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setAdapter(new MyFragmentAdapter(fm));
 
@@ -124,6 +128,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -133,6 +138,9 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            // Comença una nova activitat: SettingsActivity
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -172,4 +180,5 @@ public class MainActivity extends AppCompatActivity
     private void onClickCamera() {
 
     }
+
 }

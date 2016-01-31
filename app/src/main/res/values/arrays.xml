@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="entries">pref2
+        <item>item1</item>
+        <item>item2</item>
+        <item>item3</item>
+    </string-array>
+    <string-array name="values">pref2val
+        <item>val1</item>
+        <item>val2</item>
+        <item>val3</item>
+    </string-array>
+</resources>
