@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BMA_dia3</string>
+    <string-array name="news">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+    </string-array>
+</resources>
