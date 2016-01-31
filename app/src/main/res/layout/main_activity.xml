@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Necessari indicar id -> sinó peta al inflater -->
+    <!--Caused by: java.lang.IllegalArgumentException: Binary XML file line #7: Must specify unique android:id, android:tag, or have a parent with an id for jon.com.bma_dia4.TopFragment-->
+    <fragment
+        android:id="@+id/fragmentTop"
+        android:name="jon.com.bma_dia4.TopFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/top_fragment"
+        android:layout_weight="3" />
+
+    <!-- Versio amb dos fragments estàtics -->
+    <!--<fragment-->
+        <!--android:id="@+id/fragmentBottom"-->
+        <!--android:name="jon.com.bma_dia4.TopFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--tools:layout="@layout/bottom_fragment"-->
+        <!--android:layout_weight="1" />-->
+
+    <!-- Versió amb un fragment estatic i un altre dinàmic. El FrameLayout permet replace() i add() (per solapar un fragment a sobre)-->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+</LinearLayout>
