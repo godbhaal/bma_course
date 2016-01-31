@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <!-- Wrap Content means the textView will only the needed space-->
+    <!-- Match Parent means ocupat tot l'espai-->
+    <!-- Input type defines the keyboard that will be shown, is a string by default-->
+    <!--android:id="@+id/editText" Identifies the element with the name 'editText', '@+id' indicates creating a new id -->
+    <!--android:imeOptions="actionNext" Means that where the user finish doing this input the action taken is 'Next'
+    so find the next text input element without closing the keyboard. If it is 'Done' the keyboard will close itself -->
+    <!--android:nextFocusDown="@+id/middle" Set the next element to put the cursos be the element called 'middle'-->
+    <!-- Add image to botton use: android:src="@drawable"-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Button Activity"
+        android:id="@+id/textView3"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Write here"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Copy"
+        android:id="@+id/buttonCopiarText"
+        android:drawableLeft="@drawable/button_custom"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="50dp"
+        android:text=""
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/textView" />
+
+</LinearLayout>
