@@ -61,7 +61,6 @@ public class RecyclerViewFragment extends Fragment {
     }
 
     private ArrayList<DataObject> getDataSet() {
-        // AJUNTA tituls i valors
         String[] titles, values;
         ArrayList results = new ArrayList<DataObject>();
         titles = getResources().getStringArray(R.array.recycler_titles);
