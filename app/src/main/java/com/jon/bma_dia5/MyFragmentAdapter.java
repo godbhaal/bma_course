@@ -19,13 +19,16 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
     public MyFragmentAdapter(FragmentManager fm) {
         super(fm);
         fragments.add(Fragment0.newInstance());     // posicio 0
-        titles.add("Fragment 0");
+        titles.add("Login");
 
         fragments.add(Fragment1.newInstance());     // posicio 1
-        titles.add("Fragment 1");
+        titles.add("Check");
 
         fragments.add(Fragment2.newInstance());
-        titles.add("Fragment 2");
+        titles.add("Spinner");
+
+        fragments.add(Fragment_crono.newInstance());
+        titles.add("Crono");
     }
 
 
