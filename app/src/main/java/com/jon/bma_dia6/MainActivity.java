@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+// Alguns comentaris i links...
 //http://blog.teamtreehouse.com/android-libraries-use-every-project
 // CONTROL+SHIFT+N : buscar arxius
 //github_laz08_filterme -> takephotono..
