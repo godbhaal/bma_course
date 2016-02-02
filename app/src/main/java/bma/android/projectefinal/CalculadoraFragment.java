@@ -1,0 +1,77 @@
+package bma.android.projectefinal;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+/**
+ * Created by jon on 02/02/16.
+ */
+public class CalculadoraFragment extends Fragment {
+
+    private static final String ARG_TITLE = "CalculadoraFragment";
+    private Button button;
+    private CalculadoraBasicaFragment calculadoraBasica;
+    private CalculadoraAvansadaFragment calculadoraAvansada;
+    private FragmentManager fm;
+    private FragmentTransaction ft;
+
+    public static CalculadoraFragment newInstance() {
+        Bundle args = new Bundle();
+        CalculadoraFragment fragment = new CalculadoraFragment();
+        return fragment;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.calculadora_fragment, container, false);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        turnToBasic();
+
+        button = (Button) getActivity().findViewById(R.id.button_calc_change);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("ChangeButton Listener", "Pressed!");
+
+                if (button.getText().toString().equals("Basic")){
+                    turnToBasic();
+                    button.setText("Advanced");
+                }
+                else {
+                    turnToAdvanced();
+                    button.setText("Basic");
+                }
+            }
+        });
+    }
+    private void turnToBasic(){
+        fm = getActivity().getSupportFragmentManager();
+        calculadoraBasica = CalculadoraBasicaFragment.newInstance();
+        ft = fm.beginTransaction();
+        ft.replace(R.id.fragment_container_calc, calculadoraBasica);
+        ft.commit();
+    }
+
+    private void turnToAdvanced(){
+        fm = getActivity().getSupportFragmentManager();
+        calculadoraAvansada = CalculadoraAvansadaFragment.newInstance();
+        ft = fm.beginTransaction();
+        ft.replace(R.id.fragment_container_calc, calculadoraAvansada);
+        ft.commit();
+    }
+}
