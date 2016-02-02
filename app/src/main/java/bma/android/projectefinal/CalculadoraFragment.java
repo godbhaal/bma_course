@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Created by jon on 02/02/16.
@@ -66,6 +67,9 @@ public class CalculadoraFragment extends Fragment {
         calculadoraBasica = CalculadoraBasicaFragment.newInstance();
         ft = fm.beginTransaction();
         ft.replace(R.id.fragment_container_calc, calculadoraBasica);
+
+        TextView textView = (TextView) getActivity().findViewById(R.id.title_calculator);
+        textView.setText(R.string.calc_type_basic);
         ft.commit();
         fm = null;
         ft = null;
@@ -77,6 +81,9 @@ public class CalculadoraFragment extends Fragment {
         calculadoraAvansada = CalculadoraAvansadaFragment.newInstance();
         ft = fm.beginTransaction();
         ft.replace(R.id.fragment_container_calc, calculadoraAvansada);
+
+        TextView textView = (TextView) getActivity().findViewById(R.id.title_calculator);
+        textView.setText(R.string.calc_type_advanced);
         ft.commit();
         fm = null;
         ft = null;

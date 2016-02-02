@@ -5,6 +5,52 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/teclat_operacions"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_sum"
+                style="@style/CalcButton2"
+                android:text="+" />
+
+            <Button
+                android:id="@+id/button_sub"
+                style="@style/CalcButton2"
+                android:layout_below="@+id/button_sum"
+                android:text="-" />
+
+            <Button
+                android:id="@+id/button_mult"
+                style="@style/CalcButton2"
+                android:layout_below="@+id/button_sub"
+                android:text="*" />
+
+            <Button
+                android:id="@+id/button_div"
+                style="@style/CalcButton2"
+                android:layout_below="@+id/button_mult"
+                android:text="/" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout><!--
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
     <TextView
         android:id="@+id/title_basic_calculator"
         android:layout_width="wrap_content"
@@ -168,4 +214,4 @@
         android:layout_weight="0"
         android:text="=" />
 
-</LinearLayout>
+</LinearLayout>-->

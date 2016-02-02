@@ -2,13 +2,74 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Calculadora avançada"
-        android:id="@+id/calc_adv" />
+    <LinearLayout
+        android:id="@+id/teclat_operacions"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_square"
+                style="@style/CalcButton"
+                android:text="^2" />
+
+            <Button
+                android:id="@+id/button_sqr"
+                style="@style/CalcButton"
+                android:layout_below="@+id/button_square"
+                android:text="^1/2" />
+
+            <Button
+                android:id="@+id/button_mod"
+                style="@style/CalcButton"
+                android:layout_below="@+id/button_sqr"
+                android:text="mod" />
+
+            <Button
+                android:id="@+id/button_perc"
+                style="@style/CalcButton"
+                android:layout_below="@+id/button_mod"
+                android:text="%" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_sin"
+                style="@style/CalcButton"
+                android:text="sin" />
+
+            <Button
+                android:id="@+id/button_cos"
+                style="@style/CalcButton"
+                android:layout_below="@+id/button_sin"
+                android:text="cos" />
+
+            <Button
+                android:id="@+id/button_tan"
+                style="@style/CalcButton"
+                android:layout_below="@+id/button_cos"
+                android:text="tan" />
+
+            <Button
+                android:id="@+id/button_exp"
+                style="@style/CalcButton"
+                android:layout_below="@+id/button_tan"
+                android:text="exp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -9,4 +9,6 @@
     <string name="audio_title">Audio</string>
     <string name="nav_subtitle">Jonatan Poveda</string>
     <string name="calc_advanced">Advanced</string>
+    <string name="calc_type_basic">Calculadora Basica</string>
+    <string name="calc_type_advanced">Calculadora Avançada</string>
 </resources>
