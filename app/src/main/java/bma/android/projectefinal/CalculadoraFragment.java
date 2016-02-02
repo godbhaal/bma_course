@@ -9,8 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 /**
  * Created by jon on 02/02/16.
@@ -18,7 +19,7 @@ import android.widget.TextView;
 public class CalculadoraFragment extends Fragment {
 
     private static final String name = "CalculadoraFragment";
-    private Button button;
+    private ToggleButton toggleButton;
     private CalculadoraBasicaFragment calculadoraBasica;
     private CalculadoraAvansadaFragment calculadoraAvansada;
     private FragmentManager fm;
@@ -42,22 +43,14 @@ public class CalculadoraFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         turnToBasic();
-
-        button = (Button) getActivity().findViewById(R.id.button_calc_change);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("ChangeButton Listener", "Pressed!");
-
-                if (button.getText().toString().equals("Basic")){
-                    turnToBasic();
-                    button.setText("Advanced");
-                }
-                else {
+        toggleButton = (ToggleButton) getActivity().findViewById(R.id.button_calc_change);
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
                     turnToAdvanced();
-                    button.setText("Basic");
+                } else {
+                    turnToBasic();
                 }
-//                button.setText();
             }
         });
     }
