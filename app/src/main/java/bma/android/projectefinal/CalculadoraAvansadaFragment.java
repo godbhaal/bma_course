@@ -14,7 +14,7 @@ import bma.android.projectefinal.R;
  */
 public class CalculadoraAvansadaFragment extends Fragment {
 
-    private static final String ARG_TITLE = "CalculadoraAvansadaFragment";
+    private static final String name = "Advanced";
 
     public static CalculadoraAvansadaFragment newInstance() {
         Bundle args = new Bundle();
@@ -28,5 +28,9 @@ public class CalculadoraAvansadaFragment extends Fragment {
         View view = inflater.inflate(R.layout.calculadora_avansada_fragment,container,false);
 
         return view;
+    }
+
+    public String getName(){
+        return name;
     }
 }

@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 public class CalculadoraBasicaFragment extends Fragment {
 
 
-    private static final String ARG_TITLE = "CalculadoraBasicaFragment";
+    private static final String name = "Basic";
 
     public static CalculadoraBasicaFragment newInstance() {
         Bundle args = new Bundle();
@@ -29,4 +29,9 @@ public class CalculadoraBasicaFragment extends Fragment {
 
         return view;
     }
+
+    public String getName(){
+        return name;
+    }
+
 }

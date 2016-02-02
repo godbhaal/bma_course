@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity
     private FragmentManager fm;
     private FragmentTransaction ft;
     private CalculadoraFragment calculadoraFragment;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity
             ft = fm.beginTransaction();
             ft.replace(R.id.fragment_container_main, calculadoraFragment);
             ft.commit();
+            fab.hide();
         }
         else if (id == R.id.nav_conversor){
         }

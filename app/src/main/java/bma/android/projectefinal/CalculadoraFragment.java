@@ -16,7 +16,7 @@ import android.widget.Button;
  */
 public class CalculadoraFragment extends Fragment {
 
-    private static final String ARG_TITLE = "CalculadoraFragment";
+    private static final String name = "CalculadoraFragment";
     private Button button;
     private CalculadoraBasicaFragment calculadoraBasica;
     private CalculadoraAvansadaFragment calculadoraAvansada;
@@ -56,22 +56,29 @@ public class CalculadoraFragment extends Fragment {
                     turnToAdvanced();
                     button.setText("Basic");
                 }
+//                button.setText();
             }
         });
     }
     private void turnToBasic(){
+        calculadoraAvansada = null;
         fm = getActivity().getSupportFragmentManager();
         calculadoraBasica = CalculadoraBasicaFragment.newInstance();
         ft = fm.beginTransaction();
         ft.replace(R.id.fragment_container_calc, calculadoraBasica);
         ft.commit();
+        fm = null;
+        ft = null;
     }
 
     private void turnToAdvanced(){
+        calculadoraBasica = null;
         fm = getActivity().getSupportFragmentManager();
         calculadoraAvansada = CalculadoraAvansadaFragment.newInstance();
         ft = fm.beginTransaction();
         ft.replace(R.id.fragment_container_calc, calculadoraAvansada);
         ft.commit();
+        fm = null;
+        ft = null;
     }
 }
