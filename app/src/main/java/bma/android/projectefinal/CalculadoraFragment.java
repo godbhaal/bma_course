@@ -42,6 +42,7 @@ public class CalculadoraFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Check mode
         turnToBasic();
         toggleButton = (ToggleButton) getActivity().findViewById(R.id.button_calc_change);
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -53,6 +54,8 @@ public class CalculadoraFragment extends Fragment {
                 }
             }
         });
+
+        //Manage calculator keyboard
     }
     private void turnToBasic(){
         calculadoraAvansada = null;
