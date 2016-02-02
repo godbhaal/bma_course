@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -56,8 +57,31 @@ public class CalculadoraFragment extends Fragment {
         });
 
         //Manage calculator keyboard
+        manageNumeric();
+        manageOperations();
     }
-    private void turnToBasic(){
+
+    private void manageOperations() {
+        Button button_sum = (Button) getActivity().findViewById(R.id.button_sum);
+        Button button_sub = (Button) getActivity().findViewById(R.id.button_sub);
+        Button button_result = (Button) getActivity().findViewById(R.id.button_result);
+    }
+
+    private void manageNumeric() {
+        Button button_0 = (Button) getActivity().findViewById(R.id.button_0);
+        Button button_1 = (Button) getActivity().findViewById(R.id.button_1);
+        Button button_2 = (Button) getActivity().findViewById(R.id.button_2);
+        Button button_3 = (Button) getActivity().findViewById(R.id.button_3);
+        Button button_4 = (Button) getActivity().findViewById(R.id.button_4);
+        Button button_5 = (Button) getActivity().findViewById(R.id.button_5);
+        Button button_6 = (Button) getActivity().findViewById(R.id.button_6);
+        Button button_7 = (Button) getActivity().findViewById(R.id.button_7);
+        Button button_8 = (Button) getActivity().findViewById(R.id.button_8);
+        Button button_9 = (Button) getActivity().findViewById(R.id.button_9);
+
+    }
+
+    private void turnToBasic() {
         calculadoraAvansada = null;
         fm = getActivity().getSupportFragmentManager();
         calculadoraBasica = CalculadoraBasicaFragment.newInstance();
@@ -71,7 +95,7 @@ public class CalculadoraFragment extends Fragment {
         ft = null;
     }
 
-    private void turnToAdvanced(){
+    private void turnToAdvanced() {
         calculadoraBasica = null;
         fm = getActivity().getSupportFragmentManager();
         calculadoraAvansada = CalculadoraAvansadaFragment.newInstance();
