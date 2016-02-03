@@ -27,7 +27,7 @@
             <Button
                 android:id="@+id/button_sub"
                 style="@style/CalcButton2"
-                android:layout_below="@+id/button_sum"
+                android:layout_below="@id/button_sum"
                 android:text="-"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -35,7 +35,7 @@
             <Button
                 android:id="@+id/button_mult"
                 style="@style/CalcButton2"
-                android:layout_below="@+id/button_sub"
+                android:layout_below="@id/button_sub"
                 android:text="*"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -43,7 +43,7 @@
             <Button
                 android:id="@+id/button_div"
                 style="@style/CalcButton2"
-                android:layout_below="@+id/button_mult"
+                android:layout_below="@id/button_mult"
                 android:text="/"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

@@ -27,21 +27,21 @@
             <Button
                 android:id="@+id/button_sqr"
                 style="@style/CalcButton"
-                android:layout_below="@+id/button_square"
+                android:layout_below="@id/button_square"
                 android:text="^1/2"
                 android:layout_width="fill_parent" />
 
             <Button
                 android:id="@+id/button_mod"
                 style="@style/CalcButton"
-                android:layout_below="@+id/button_sqr"
+                android:layout_below="@id/button_sqr"
                 android:text="mod"
                 android:layout_width="fill_parent" />
 
             <Button
                 android:id="@+id/button_perc"
                 style="@style/CalcButton"
-                android:layout_below="@+id/button_mod"
+                android:layout_below="@id/button_mod"
                 android:text="%"
                 android:layout_width="fill_parent" />
         </LinearLayout>
@@ -61,21 +61,21 @@
             <Button
                 android:id="@+id/button_cos"
                 style="@style/CalcButton"
-                android:layout_below="@+id/button_sin"
+                android:layout_below="@id/button_sin"
                 android:text="cos"
                 android:layout_width="fill_parent" />
 
             <Button
                 android:id="@+id/button_tan"
                 style="@style/CalcButton"
-                android:layout_below="@+id/button_cos"
+                android:layout_below="@id/button_cos"
                 android:text="tan"
                 android:layout_width="fill_parent" />
 
             <Button
                 android:id="@+id/button_exp"
                 style="@style/CalcButton"
-                android:layout_below="@+id/button_tan"
+                android:layout_below="@id/button_tan"
                 android:text="exp"
                 android:layout_width="fill_parent" />
         </LinearLayout>

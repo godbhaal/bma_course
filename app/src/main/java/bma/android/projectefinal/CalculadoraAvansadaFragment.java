@@ -15,6 +15,9 @@ import bma.android.projectefinal.R;
 public class CalculadoraAvansadaFragment extends Fragment {
 
     private static final String name = "Advanced";
+    // Seria millor ferho amb una interficie.. pero
+    private CalculadoraFragment calculadoraFragment;
+    private View view;
 
     public static CalculadoraAvansadaFragment newInstance() {
         Bundle args = new Bundle();
@@ -25,12 +28,15 @@ public class CalculadoraAvansadaFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.calculadora_avansada_fragment,container,false);
-
+        view = inflater.inflate(R.layout.calculadora_avansada_fragment,container,false);
         return view;
     }
 
     public String getName(){
         return name;
+    }
+
+    public void setCalculadoraFragment(CalculadoraFragment calculadoraFragment) {
+        this.calculadoraFragment = calculadoraFragment;
     }
 }
