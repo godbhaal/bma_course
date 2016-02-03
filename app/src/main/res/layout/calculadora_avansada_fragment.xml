@@ -19,7 +19,7 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/button_square"
+                android:id="@+id/button_to2"
                 style="@style/CalcButton"
                 android:text="^2"
                 android:layout_width="fill_parent" />
@@ -27,7 +27,7 @@
             <Button
                 android:id="@+id/button_sqr"
                 style="@style/CalcButton"
-                android:layout_below="@id/button_square"
+                android:layout_below="@id/button_to2"
                 android:text="^1/2"
                 android:layout_width="fill_parent" />
 
@@ -39,7 +39,7 @@
                 android:layout_width="fill_parent" />
 
             <Button
-                android:id="@+id/button_perc"
+                android:id="@+id/button_per"
                 style="@style/CalcButton"
                 android:layout_below="@id/button_mod"
                 android:text="%"

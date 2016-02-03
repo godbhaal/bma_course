@@ -11,4 +11,5 @@
     <string name="calc_advanced">Advanced</string>
     <string name="calc_type_basic">Calculadora Basica</string>
     <string name="calc_type_advanced">Calculadora Avançada</string>
+    <string name="initial_message_on_calc_display">Type</string>
 </resources>

@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content" />
 
             <Button
-                android:id="@+id/button_mult"
+                android:id="@+id/button_mul"
                 style="@style/CalcButton2"
                 android:layout_below="@id/button_sub"
                 android:text="*"
@@ -43,7 +43,7 @@
             <Button
                 android:id="@+id/button_div"
                 style="@style/CalcButton2"
-                android:layout_below="@id/button_mult"
+                android:layout_below="@id/button_mul"
                 android:text="/"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

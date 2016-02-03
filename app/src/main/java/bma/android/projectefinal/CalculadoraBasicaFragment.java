@@ -13,13 +13,18 @@ import android.widget.Button;
  * Created by Duffman on 1/2/16.
  */
 public class CalculadoraBasicaFragment extends Fragment {
-
-
     private static final String name = "Basic";
-    private Button button_sum;
-    private Button button_sub;
     private View view;
     private CalculadoraFragment calculadoraFragment;
+    private Button button_sum, button_sub, button_div, button_mul;
+    private View.OnClickListener buttonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String st = ((Button) v).getText().toString();
+            Log.d("ButtonClicked: ", st);
+            calculadoraFragment.check(st);
+        }
+    };
 
     public static CalculadoraBasicaFragment newInstance() {
         Bundle args = new Bundle();
@@ -44,29 +49,18 @@ public class CalculadoraBasicaFragment extends Fragment {
         return name;
     }
 
+    public void setCalculadoraFragment(CalculadoraFragment calculadoraFragment) {
+        this.calculadoraFragment = calculadoraFragment;
+    }
+
     private void manageOperations() {
         button_sum = (Button) view.findViewById(R.id.button_sum);
         button_sub = (Button) view.findViewById(R.id.button_sub);
-
-        button_sum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("ButtonClicked: ", button_sum.getText().toString());
-                calculadoraFragment.check(button_sum.getText().toString());
-            }
-        });
-
-        button_sub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("ButtonClicked: ", button_sub.getText().toString());
-                calculadoraFragment.check(button_sub.getText().toString());
-            }
-        });
-
-    }
-
-    public void setCalculadoraFragment(CalculadoraFragment calculadoraFragment) {
-        this.calculadoraFragment = calculadoraFragment;
+        button_mul = (Button) view.findViewById(R.id.button_mul);
+        button_div = (Button) view.findViewById(R.id.button_div);
+        button_sum.setOnClickListener(buttonClickListener);
+        button_sub.setOnClickListener(buttonClickListener);
+        button_mul.setOnClickListener(buttonClickListener);
+        button_div.setOnClickListener(buttonClickListener);
     }
 }

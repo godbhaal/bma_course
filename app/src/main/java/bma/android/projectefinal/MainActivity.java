@@ -97,13 +97,9 @@ public class MainActivity extends AppCompatActivity
             ft.replace(R.id.fragment_container_main, calculadoraFragment);
             ft.commit();
             fab.hide();
+        } else if (id == R.id.nav_conversor) {
+        } else if (id == R.id.nav_audio) {
         }
-        else if (id == R.id.nav_conversor){
-        }
-        else if (id == R.id.nav_audio){
-
-        }
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

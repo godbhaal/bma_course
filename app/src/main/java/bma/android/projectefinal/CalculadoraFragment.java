@@ -18,7 +18,8 @@ import android.widget.ToggleButton;
 /**
  * Created by jon on 02/02/16.
  */
-public class CalculadoraFragment extends Fragment implements View.OnClickListener {
+//public class CalculadoraFragment extends Fragment implements View.OnClickListener {
+public class CalculadoraFragment extends Fragment {
 
     private static final String name = "CalculadoraFragment";
     private ToggleButton toggleButton;
@@ -28,25 +29,23 @@ public class CalculadoraFragment extends Fragment implements View.OnClickListene
     private FragmentTransaction ft;
     private TextView display;
     private View view;
-    private Button button_0;
-    private Button button_1;
-    private Button button_2;
-    private Button button_3;
-    private Button button_4;
-    private Button button_5;
-    private Button button_6;
-    private Button button_7;
-    private Button button_8;
-    private Button button_9;
-    private Button button_result;
-
+    private Button button_0, button_1, button_2, button_3, button_4, button_5, button_6, button_7,
+            button_8, button_9, button_result, button_sig, button_dot;
     private String outputString = "", firstString = "", secondString = "", operation = "";
-    private int first, second, result;
+    private double first, second, result;
     private final int STATE_INITIAL = 0, STATE_FIRST = 1, STATE_SECOND = 2;
-    private boolean clickedBefore = false, isNumber;
     private int state = STATE_INITIAL;
-    private int countNumbers = 0;
+    private boolean isNumber;
     private String resultString = "";
+    // Atribut. Funciona com un metode per als botons
+    private View.OnClickListener buttonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String st = ((Button) v).getText().toString();
+            Log.d("ButtonClicked: ", st);
+            check(st);
+        }
+    };
 
     public static CalculadoraFragment newInstance() {
         Bundle args = new Bundle();
@@ -86,17 +85,15 @@ public class CalculadoraFragment extends Fragment implements View.OnClickListene
 
     private void manageOperations() {
         button_result = (Button) view.findViewById(R.id.button_result);
-
-        button_result.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("ButtonClicked: ", button_result.getText().toString());
-                check(button_result.getText().toString());
-            }
-        });
+        button_result.setOnClickListener(buttonClickListener);
+        button_sig = (Button) view.findViewById(R.id.button_sig);
+        button_sig.setOnClickListener(buttonClickListener);
+        button_dot = (Button) view.findViewById(R.id.button_dot);
+        button_dot.setOnClickListener(buttonClickListener);
     }
 
     private void manageNumeric() {
+        // Buscar els botons
         button_0 = (Button) view.findViewById(R.id.button_0);
         button_1 = (Button) view.findViewById(R.id.button_1);
         button_2 = (Button) view.findViewById(R.id.button_2);
@@ -108,29 +105,24 @@ public class CalculadoraFragment extends Fragment implements View.OnClickListene
         button_8 = (Button) view.findViewById(R.id.button_8);
         button_9 = (Button) view.findViewById(R.id.button_9);
 
-        button_0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("ButtonClicked: ", button_0.getText().toString());
-                check(button_0.getText().toString());
-            }
-        });
-
-        button_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("ButtonClicked: ", button_1.getText().toString());
-                check(button_1.getText().toString());
-            }
-        });
-
+        // Vigilar els clicks
+        button_0.setOnClickListener(buttonClickListener);
+        button_1.setOnClickListener(buttonClickListener);
+        button_2.setOnClickListener(buttonClickListener);
+        button_3.setOnClickListener(buttonClickListener);
+        button_4.setOnClickListener(buttonClickListener);
+        button_5.setOnClickListener(buttonClickListener);
+        button_6.setOnClickListener(buttonClickListener);
+        button_7.setOnClickListener(buttonClickListener);
+        button_8.setOnClickListener(buttonClickListener);
+        button_9.setOnClickListener(buttonClickListener);
     }
 
     protected void check(String newInput) {
         Log.d("STATE: ", String.valueOf(state));
         // Check if it is a number
         try {
-            int number = Integer.valueOf(newInput);
+            double number = Double.valueOf(newInput);
             Log.d("check() is number!", String.valueOf(number));
             isNumber = true;
         } catch (NumberFormatException e) {
@@ -148,12 +140,17 @@ public class CalculadoraFragment extends Fragment implements View.OnClickListene
                 break;
 
             case STATE_FIRST:
-                if (isNumber) {
+                if (isNumber || newInput.equals(".")) {
                     firstString += newInput;
-                } else if (newInput.equals("=")){
+                } else if (newInput.equals("=")) {
                     Toast.makeText(getContext(), "Please enter the second number ", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else if (newInput.equals("+-")) {
+                    if (firstString.startsWith("-")) {
+                        firstString = firstString.substring(1);
+                    } else {
+                        firstString = "-" + firstString;
+                    }
+                } else {
                     operation = newInput;
                     state = STATE_SECOND;
                 }
@@ -162,18 +159,23 @@ public class CalculadoraFragment extends Fragment implements View.OnClickListene
             case STATE_SECOND:  //afegir una clausula que aseguri que hi ha almenys un numero al SECOND per poder fer IGUAL
                 if (isNumber) {
                     secondString += newInput;
-                } else if (newInput.equals("=")) {
-                    first = Integer.valueOf(firstString);
-                    second = Integer.valueOf(secondString);
+                } else if (secondString.length() > 0 && newInput.equals("=")) {
+                    first = Double.valueOf(firstString);
+                    second = Double.valueOf(secondString);
                     if (operation.equals("+")) {
                         result = first + second;
                     } else if (operation.equals("-")) {
                         result = first - second;
+                    } else if (operation.equals("*")) {
+                        result = first * second;
+                    } else if (operation.equals("/")) {
+                        result = first / second;
+                    } else if (operation.equals("mod")) {
+                        result = (first/second - (int) (first/second))*second;
                     }
                     resultString = "=" + String.valueOf(result);
                     state = STATE_INITIAL;
-                }
-                else {
+                } else {
                     Toast.makeText(getContext(), "One operation at a time!", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -193,43 +195,36 @@ public class CalculadoraFragment extends Fragment implements View.OnClickListene
     }
 
     private void turnToBasic() {
-        calculadoraAvansada = null;
-        fm = getActivity().getSupportFragmentManager();
+        /* En una activity:       fm = getActivity().getSupportFragmentManager();
+        Pero aqui el podem treure directament del pare fent: fm = getChildFragmentManager(); */
+        fm = getChildFragmentManager();
         calculadoraBasica = CalculadoraBasicaFragment.newInstance();
         calculadoraBasica.setCalculadoraFragment(this);
         ft = fm.beginTransaction();
         ft.replace(R.id.fragment_container_calc, calculadoraBasica);
+        ft.commit();
 
         TextView textView = (TextView) view.findViewById(R.id.title_calculator);
         textView.setText(R.string.calc_type_basic);
-        ft.commit();
+        // Per a poder ser netejats
         fm = null;
         ft = null;
+        calculadoraBasica = null;
     }
 
     private void turnToAdvanced() {
-        calculadoraBasica = null;
         fm = getChildFragmentManager();
         calculadoraAvansada = CalculadoraAvansadaFragment.newInstance();
         calculadoraAvansada.setCalculadoraFragment(this);
-//        calculadoraAvansada.manageOperations();
         ft = fm.beginTransaction();
         ft.replace(R.id.fragment_container_calc, calculadoraAvansada);
+        ft.commit();
 
         TextView textView = (TextView) view.findViewById(R.id.title_calculator);
         textView.setText(R.string.calc_type_advanced);
-        ft.commit();
+        // Per a poder ser netejats
         fm = null;
         ft = null;
-    }
-
-    @Override
-    public void onClick(View v) {
-        v.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                v.get
-            }
-        });
+        calculadoraAvansada = null;
     }
 }
