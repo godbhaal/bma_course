@@ -38,20 +38,15 @@ public class CalculadoraFragment extends Fragment implements View.OnClickListene
     private Button button_7;
     private Button button_8;
     private Button button_9;
-
     private Button button_result;
-    private String outputString;
-    private String inputString;
-    private String firstString, secondString;
-    private int first, second;
-    private final int STATE_FIRST = 1;
-    private final int STATE_OPERATION = 2;
-    private final int STATE_SECOND = 3;
-    private final int STATE_RESULT = 4;
-    private boolean clickedBefore = false;
-    private int state;
-    private String operation;
+
+    private String outputString = "", firstString = "", secondString = "", operation = "";
+    private int first, second, result;
+    private final int STATE_INITIAL = 0, STATE_FIRST = 1, STATE_SECOND = 2;
+    private boolean clickedBefore = false, isNumber;
+    private int state = STATE_INITIAL;
     private int countNumbers = 0;
+    private String resultString = "";
 
     public static CalculadoraFragment newInstance() {
         Bundle args = new Bundle();
@@ -84,8 +79,6 @@ public class CalculadoraFragment extends Fragment implements View.OnClickListene
         });
 
         display = (TextView) view.findViewById(R.id.calculator_display);
-        inputString = "";
-        outputString = "";
         //Manage calculator keyboard
         manageNumeric();
         manageOperations();
@@ -135,76 +128,68 @@ public class CalculadoraFragment extends Fragment implements View.OnClickListene
 
     protected void check(String newInput) {
         Log.d("STATE: ", String.valueOf(state));
-        int number = -1;
+        // Check if it is a number
         try {
-            number = Integer.valueOf(newInput);
-            Log.d("check()", String.valueOf(number));
+            int number = Integer.valueOf(newInput);
+            Log.d("check() is number!", String.valueOf(number));
+            isNumber = true;
         } catch (NumberFormatException e) {
+            isNumber = false;
         }
 
-        if (!clickedBefore) {
-            if (number != -1) {
-                state = STATE_FIRST;
-            }
-            else {
-                Toast.makeText(getContext(), "No number to apply this operation", Toast.LENGTH_SHORT);
-                clickedBefore = false;
-            }
-        }
+        switch (state) {
+            case STATE_INITIAL:
+                if (isNumber) {
+                    firstString += newInput;
+                    state = STATE_FIRST;
+                } else {
+                    Toast.makeText(getContext(), "Please enter a number first", Toast.LENGTH_SHORT).show();
+                }
+                break;
 
-        Log.d("STATE: ", String.valueOf(state));
-        if (state == STATE_FIRST) { // save the number as first, change state if an operation is clicked
-            // If it is a number
-            if (number != -1) {
-                inputString += newInput;
-                firstString += newInput;
-                countNumbers++;
-                // If is not a number, then is a operation
-            } else {
-                state = STATE_OPERATION;
-                Log.d("STATE: ", String.valueOf(state));
-                countNumbers = 0;
-            }
-        }
-        if (state == STATE_OPERATION){
-            inputString += " "+newInput+" ";
-            operation = newInput;
-            state = STATE_SECOND;
-            Log.d("STATE: ", String.valueOf(state));
-        }
-        else if (state == STATE_SECOND) {    // save the number as first, change state if '=' is clicked
-            if (number != -1) {
-                inputString += newInput;
-                secondString += newInput;
-                countNumbers++;
-            } else {
-                if (countNumbers>0){
-                    state = STATE_RESULT;
-                    Log.d("STATE: ", String.valueOf(state));
+            case STATE_FIRST:
+                if (isNumber) {
+                    firstString += newInput;
+                } else if (newInput.equals("=")){
+                    Toast.makeText(getContext(), "Please enter the second number ", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(getContext(), "No second number to compute result", Toast.LENGTH_SHORT);
+                    operation = newInput;
+                    state = STATE_SECOND;
                 }
-            }
+                break;
 
+            case STATE_SECOND:  //afegir una clausula que aseguri que hi ha almenys un numero al SECOND per poder fer IGUAL
+                if (isNumber) {
+                    secondString += newInput;
+                } else if (newInput.equals("=")) {
+                    first = Integer.valueOf(firstString);
+                    second = Integer.valueOf(secondString);
+                    if (operation.equals("+")) {
+                        result = first + second;
+                    } else if (operation.equals("-")) {
+                        result = first - second;
+                    }
+                    resultString = "=" + String.valueOf(result);
+                    state = STATE_INITIAL;
+                }
+                else {
+                    Toast.makeText(getContext(), "One operation at a time!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                Toast.makeText(getContext(), "check(): Something bad happened", Toast.LENGTH_SHORT).show();
+                break;
         }
-        if (state == STATE_RESULT){  // do the operation
-            if (newInput == "="){
-                Log.d("Check()", "give the result..");
-                first = Integer.valueOf(firstString);
-                second = Integer.valueOf(secondString);
 
-            }
-            else {
-                Toast.makeText(getContext(), "Operation not allowed", Toast.LENGTH_SHORT);
-            }
-        }
-//        else {
-//            Log.e("check()", "impossible state!");
-//        }
-
+        outputString = firstString + operation + secondString + resultString;
         display.setText(outputString);
-        clickedBefore = true;
+        if (state == STATE_INITIAL) {
+            firstString = "";
+            secondString = "";
+            operation = "";
+            resultString = "";
+        }
     }
 
     private void turnToBasic() {
