@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BMA_dia8</string>
+    <string name="delete">Borra</string>
+    <string name="load">Carrega</string>
+    <string name="man">Home</string>
+    <string name="name">Nom</string>
+    <string name="save">Guarda</string>
+    <string name="surname">Cognom</string>
+    <string name="update">Actualitza</string>
+    <string name="woman">Dona</string>
+    <string name="age">Edat</string>
+</resources>

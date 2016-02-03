@@ -63,7 +63,7 @@ public class Persona {
         public static final String COLUMN_NAME_AGE = "edat";
         public static final String COLUMN_NAME_ES_HOME = "esHome";
         public static final String SQL_CREATE_ENTRIES =
-                "CRATE TABLE" + TABLE_NAME + " (" +
+                "CREATE TABLE " + TABLE_NAME + " (" +
                         COLUMN_NAME_NAME + " TEXT PRIMARY KEY, " +
                         COLUMN_NAME_SURNAME + " TEXT, " +
                         COLUMN_NAME_AGE + " INTEGER, " +

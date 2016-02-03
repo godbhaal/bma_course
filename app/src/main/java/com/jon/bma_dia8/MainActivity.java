@@ -1,6 +1,8 @@
 package com.jon.bma_dia8;
 
+import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,11 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Button buttonCargar, buttonGuardar, buttonUpdate, buttonDelete;
-    EditText etName, etSurname, etAge;
-    RadioButton rbHome, rbDona;
+    private Button buttonCargar, buttonGuardar, buttonUpdate, buttonDelete;
+    private EditText etName, etSurname, etAge;
+    private RadioButton rbHome, rbDona;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,42 @@ public class MainActivity extends AppCompatActivity {
         rbDona = (RadioButton) findViewById(R.id.radioButton_dona);
 
         // Gestionar botons
+        buttonGuardar = (Button) findViewById(R.id.buttonGuardar);
+        buttonGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Persona persona = getPersona();
+                // Es crea la base de dades, s'actualitza.. el que faci falta
+                PersistenciaDBHelper mDbHelper = new PersistenciaDBHelper(MainActivity.this);
+                // Aconseguir la database
+                SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(Persona.PersonaEntry.COLUMN_NAME_NAME, persona.getNom());
+                contentValues.put(Persona.PersonaEntry.COLUMN_NAME_SURNAME, persona.getCognoms());
+                contentValues.put(Persona.PersonaEntry.COLUMN_NAME_AGE, persona.getEdat());
+                contentValues.put(Persona.PersonaEntry.COLUMN_NAME_ES_HOME, persona.esHome());
+
+                try {
+                    /* El tercer parametre sempre a null. contentValues es la informacio de la fila
+                    de la db, (hi havia un camp que era KEY) si fem servir inserOrThrow saltarà
+                    una exception quan vulguem introduir una persona amb el mateix nom */
+                    db.insertOrThrow(Persona.PersonaEntry.TABLE_NAME, null, contentValues);
+                } catch (SQLiteConstraintException e) {
+                    Toast.makeText(MainActivity.this, "User already exists", Toast.LENGTH_SHORT).show();
+
+                    /*String whereClause = Persona.PersonaEntry.COLUMN_NAME_NAME + " LIKE ?";
+                    String[] whereArgs = { persona.getNom() };
+                    db.update (
+                        Persona.PersonaEntry.TABLE_NAME,
+                        contentValues,
+                        whereClause,
+                        whereArgs
+                    ); */
+                }
+            }
+        });
+
         buttonCargar = (Button) findViewById(R.id.buttonCargar);
         buttonCargar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,17 +80,71 @@ public class MainActivity extends AppCompatActivity {
                         Persona.PersonaEntry.COLUMN_NAME_ES_HOME
                 };
 
-//                Cursor cursor = db.query(
-//                        Persona.PersonaEntry.TABLE_NAME,
-//                        projection,   //the columns to return
-//                        null,
-//                )
+                Cursor cursor = db.query(
+                        Persona.PersonaEntry.TABLE_NAME,    //Table name
+                        projection,   //the columns to return
+                        null,   //the colums for the WHERE clause
+                        null,   // the values for the WHERE clause
+                        null,   // don't group the rows
+                        null,   // don't filter by row groups
+                        null    // the sort order
+                );
+
+                if (cursor.moveToFirst()) {
+                    // s'ha d'accedir a les columnes per un Integer, no permet Strings
+                    // segueix l'ordre de la 'projection'
+                    String name = cursor.getString(0);
+                    String surname = cursor.getString(1);
+                    int age = cursor.getInt(2);
+                    boolean esHome = cursor.getInt(3) == 1 ? true : false;
+                    Persona persona = new Persona(name, surname, age, esHome);
+                    // Posem la persona al View
+                    setPersona(persona);
+                }
             }
         });
+
+/*        buttonUpdate = (Button) findViewById(R.id.buttonUpdate);
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Persona persona = getPersona();
+                // Es crea la base de dades, s'actualitza.. el que faci falta
+                PersistenciaDBHelper mDbHelper = new PersistenciaDBHelper(MainActivity.this);
+                // Aconseguir la database
+                SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(Persona.PersonaEntry.COLUMN_NAME_NAME, persona.getNom());
+                contentValues.put(Persona.PersonaEntry.COLUMN_NAME_SURNAME, persona.getCognoms());
+                contentValues.put(Persona.PersonaEntry.COLUMN_NAME_AGE, persona.getEdat());
+                contentValues.put(Persona.PersonaEntry.COLUMN_NAME_ES_HOME, persona.esHome());
+
+                try {
+                    *//* El tercer parametre sempre a null. contentValues es la informacio de la fila
+                    de la db, (hi havia un camp que era KEY) si fem servir inserOrThrow saltarà
+                    una exception quan vulguem introduir una persona amb el mateix nom *//*
+//                    db.insertOrThrow(Persona.PersonaEntry.TABLE_NAME, null, contentValues);
+                    db.replaceOrThrow(Persona.PersonaEntry.TABLE_NAME, null, contentValues);
+                } catch (SQLiteConstraintException e) {
+                    Toast.makeText(MainActivity.this, "Cannot update!", Toast.LENGTH_SHORT).show();
+
+                    *//*String whereClause = Persona.PersonaEntry.COLUMN_NAME_NAME + " LIKE ?";
+                    String[] whereArgs = { persona.getNom() };
+                    db.update (
+                        Persona.PersonaEntry.TABLE_NAME,
+                        contentValues,
+                        whereClause,
+                        whereArgs
+                    ); *//*
+                }
+            }
+        });*/
+
     }
 
     // Getter i Setter de persona, facilita la relacio Object.Persona<->View.Persona
-    private Persona getPersona(){
+    private Persona getPersona() {
         String name = etName.getText().toString();
         String surname = etSurname.getText().toString();
         int age = Integer.valueOf(etAge.getText().toString());
@@ -59,10 +152,10 @@ public class MainActivity extends AppCompatActivity {
         return new Persona(name, surname, age, esHome);
     }
 
-    private void setPersona(Persona persona){
+    private void setPersona(Persona persona) {
         etName.setText(persona.getNom());
         etSurname.setText(persona.getCognoms());
-        etAge.setText(persona.getEdat());
+        etAge.setText(String.valueOf(persona.getEdat()));
         rbHome.setChecked(persona.esHome());
         rbDona.setChecked(persona.esDona());
     }

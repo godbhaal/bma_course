@@ -19,7 +19,7 @@
         android:layout_toEndOf="@+id/textView"
         android:layout_toRightOf="@+id/textView"
         android:ems="10"
-        android:hint="Name"
+        android:hint="@string/name"
         android:inputType="textPersonName" />
 
     <EditText
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Surname"
+        android:hint="@string/surname"
         android:inputType="textPersonName" />
 
     <EditText
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Age"
+        android:hint="@string/age"
         android:inputType="numberSigned" />
 
     <RadioGroup
@@ -48,14 +48,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_horizontal"
-            android:text="Man" />
+            android:text="@string/man" />
 
         <RadioButton
             android:id="@+id/radioButton_dona"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_horizontal"
-            android:text="Woman" />
+            android:text="@string/woman" />
 
     </RadioGroup>
 
@@ -65,26 +65,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Save" />
+        android:layout_marginTop="32dp"
+        android:text="@string/save" />
 
     <Button
         android:id="@+id/buttonCargar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Load" />
+        android:text="@string/load" />
 
     <Button
         android:id="@+id/buttonUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Update" />
+        android:text="@string/update" />
 
     <Button
         android:id="@+id/buttonDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Delete" />
+        android:text="@string/delete" />
 </LinearLayout>
