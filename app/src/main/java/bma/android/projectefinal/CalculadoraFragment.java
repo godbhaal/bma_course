@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 /**
@@ -50,6 +51,7 @@ public class CalculadoraFragment extends Fragment implements View.OnClickListene
     private boolean clickedBefore = false;
     private int state;
     private String operation;
+    private int countNumbers = 0;
 
     public static CalculadoraFragment newInstance() {
         Bundle args = new Bundle();
@@ -132,8 +134,7 @@ public class CalculadoraFragment extends Fragment implements View.OnClickListene
     }
 
     protected void check(String newInput) {
-
-
+        Log.d("STATE: ", String.valueOf(state));
         int number = -1;
         try {
             number = Integer.valueOf(newInput);
@@ -142,37 +143,65 @@ public class CalculadoraFragment extends Fragment implements View.OnClickListene
         }
 
         if (!clickedBefore) {
-            state = STATE_FIRST;
+            if (number != -1) {
+                state = STATE_FIRST;
+            }
+            else {
+                Toast.makeText(getContext(), "No number to apply this operation", Toast.LENGTH_SHORT);
+                clickedBefore = false;
+            }
         }
 
+        Log.d("STATE: ", String.valueOf(state));
         if (state == STATE_FIRST) { // save the number as first, change state if an operation is clicked
             // If it is a number
             if (number != -1) {
                 inputString += newInput;
                 firstString += newInput;
+                countNumbers++;
+                // If is not a number, then is a operation
             } else {
                 state = STATE_OPERATION;
-                // ask to fragment to do the operation
+                Log.d("STATE: ", String.valueOf(state));
+                countNumbers = 0;
             }
-
-        } else if (state == STATE_SECOND) {    // save the number as first, change state if '=' is clicked
-            if (number != -1) {
-                inputString += newInput;
-                secondString += newInput;
-            } else {
-                state = STATE_RESULT;
-            }
-
-        } else if (state == STATE_OPERATION) {
+        }
+        if (state == STATE_OPERATION){
             inputString += " "+newInput+" ";
             operation = newInput;
             state = STATE_SECOND;
-
-        } else if (state == STATE_RESULT){  // do the operation
-
-        } else {
-            Log.e("check()", "impossible state!");
+            Log.d("STATE: ", String.valueOf(state));
         }
+        else if (state == STATE_SECOND) {    // save the number as first, change state if '=' is clicked
+            if (number != -1) {
+                inputString += newInput;
+                secondString += newInput;
+                countNumbers++;
+            } else {
+                if (countNumbers>0){
+                    state = STATE_RESULT;
+                    Log.d("STATE: ", String.valueOf(state));
+                }
+                else {
+                    Toast.makeText(getContext(), "No second number to compute result", Toast.LENGTH_SHORT);
+                }
+            }
+
+        }
+        if (state == STATE_RESULT){  // do the operation
+            if (newInput == "="){
+                Log.d("Check()", "give the result..");
+                first = Integer.valueOf(firstString);
+                second = Integer.valueOf(secondString);
+
+            }
+            else {
+                Toast.makeText(getContext(), "Operation not allowed", Toast.LENGTH_SHORT);
+            }
+        }
+//        else {
+//            Log.e("check()", "impossible state!");
+//        }
 
         display.setText(outputString);
         clickedBefore = true;
@@ -198,6 +227,7 @@ public class CalculadoraFragment extends Fragment implements View.OnClickListene
         fm = getChildFragmentManager();
         calculadoraAvansada = CalculadoraAvansadaFragment.newInstance();
         calculadoraAvansada.setCalculadoraFragment(this);
+//        calculadoraAvansada.manageOperations();
         ft = fm.beginTransaction();
         ft.replace(R.id.fragment_container_calc, calculadoraAvansada);
 

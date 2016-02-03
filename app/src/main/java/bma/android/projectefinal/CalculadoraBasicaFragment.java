@@ -34,6 +34,12 @@ public class CalculadoraBasicaFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        manageOperations();
+    }
+
     public String getName() {
         return name;
     }
