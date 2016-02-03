@@ -171,7 +171,13 @@ public class CalculadoraFragment extends Fragment {
                     } else if (operation.equals("/")) {
                         result = first / second;
                     } else if (operation.equals("mod")) {
-                        result = (first/second - (int) (first/second))*second;
+                        double tmp = ((first/second - (int) (first/second))*second);
+                        if ((tmp - (int) tmp) == 0){
+                            result = (int) tmp;
+                        }
+                        else {
+                            result = (int) (tmp+1);
+                        }
                     }
                     resultString = "=" + String.valueOf(result);
                     state = STATE_INITIAL;
