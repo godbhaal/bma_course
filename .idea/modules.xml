@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file:///media/DADES/Development/AndroidStudioProjects/BMA_dia6/BMA_dia6.iml" filepath="/media/DADES/Development/AndroidStudioProjects/BMA_dia6/BMA_dia6.iml" />
-      <module fileurl="file:///media/DADES/Development/AndroidStudioProjects/BMA_dia6/app/app.iml" filepath="/media/DADES/Development/AndroidStudioProjects/BMA_dia6/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BMA_dia6.iml" filepath="$PROJECT_DIR$/BMA_dia6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
