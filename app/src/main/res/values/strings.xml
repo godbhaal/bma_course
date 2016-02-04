@@ -13,4 +13,5 @@
     <string name="calc_type_advanced">Calculadora Avançada</string>
     <string name="initial_message_on_calc_display">Type</string>
     <string name="conversor_fragment_title">Currency conversor</string>
+    <string name="convert_button">Convert!</string>
 </resources>
