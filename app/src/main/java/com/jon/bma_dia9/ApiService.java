@@ -13,7 +13,6 @@ import retrofit2.http.GET;
  *              compile 'com.google.code.gson:gson:2.5'
  */
 public interface ApiService {
-//    @GET("/v2/stations")
-    @GET("/stations")
+    @GET("stations")
     public Call<JsonObject> getBikesBarcelona();
 }
