@@ -11,12 +11,14 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="StreetName &amp; NumberOfBikes"
+        android:text="StreetName, NumberOfBikes, Status"
         android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:singleLine="true"
+        android:textSize="20sp" />
 
     <ListView
         android:layout_width="match_parent"

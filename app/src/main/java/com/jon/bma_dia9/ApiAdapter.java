@@ -42,12 +42,15 @@ public class ApiAdapter extends BaseAdapter{
         View view = inflater.inflate(R.layout.api_adapter_element, parent, false);
         TextView textView_streetName = (TextView) view.findViewById(R.id.streetName);
         TextView textView_bikes = (TextView) view.findViewById(R.id.numberOfBikes);
+        TextView textView_status = (TextView) view.findViewById(R.id.status);
         JsonObject station = array.get(position).getAsJsonObject();
         String stationName = station.get("streetName").getAsString();
         String numberOfBikes = station.get("bikes").getAsString();
+        String status = station.get("status").getAsString();
 
         textView_streetName.setText(stationName);
         textView_bikes.setText(numberOfBikes);
+        textView_status.setText(status);
         return view;
     }
 }
