@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
                 JsonObject body = response.body();
                 JsonArray array = body.get("stations").getAsJsonArray();
-//                listView.setAdapter(new ApiAdapter((MainActivity.this, array));
                 listView.setAdapter(new ApiAdapter(MainActivity.this, array));
             }
 
