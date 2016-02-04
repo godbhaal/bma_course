@@ -21,21 +21,34 @@
 
         <EditText
             android:id="@+id/input_value"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:ems="10"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:nextFocusDown="@+id/input_currency"
             android:hint="Input Value"
             android:inputType="numberDecimal"
-            android:textSize="20sp" />
+            android:singleLine="true"
+            android:textSize="22sp">
 
-        <EditText
+            <requestFocus />
+        </EditText>
+
+        <Spinner
             android:id="@+id/input_currency"
-            android:layout_width="wrap_content"
+            android:nextFocusDown="@+id/output_currency"
+            android:nextFocusUp="@+id/input_value"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="2"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:hint="Select"
             android:textSize="20sp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -47,31 +60,40 @@
 
         <TextView
             android:id="@+id/output_value"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:ems="10"
-            android:hint="OutputValue"
-            android:inputType="number"
+            android:layout_weight="1"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="Output Value"
+            android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="20sp" />
+            android:textSize="22sp" />
 
-        <EditText
+        <Spinner
             android:id="@+id/output_currency"
-            android:layout_width="wrap_content"
+            android:nextFocusDown="@+id/convert_button"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="2"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:hint="Select"
             android:textSize="20sp" />
 
     </LinearLayout>
 
     <Button
+        android:id="@+id/convert_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/convert_button"
-        android:id="@+id/convert_button"
-        android:layout_gravity="center_horizontal" />
-
+        android:layout_gravity="center_horizontal"
+        android:maxHeight="100dp"
+        android:maxWidth="100dp"
+        android:minHeight="100dp"
+        android:minWidth="100dp"
+        android:text="@string/convert_button" />
 
 </LinearLayout>

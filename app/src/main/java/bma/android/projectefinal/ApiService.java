@@ -14,6 +14,6 @@ public interface ApiService {
     public Call<JsonObject> getLatestExchange();
 
     @GET("latest")
-    public Call<JsonObject> getConversion(@Query("sort") String currency_base_name);
+    public Call<JsonObject> getConversion(@Query("base") String currency_base_name);
 }
 

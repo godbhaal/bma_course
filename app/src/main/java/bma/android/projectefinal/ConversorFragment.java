@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,8 @@ public class ConversorFragment extends Fragment {
             "DKK", "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR",
             "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK", "SGD", "THB", "TRY", "ZAR", "EUR"};
     private TextView vt_output_value;
-    private EditText vt_input_currency, vt_input_value, vt_output_currency;
+    private EditText vt_input_value;
+    private Spinner vt_input_currency, vt_output_currency;
     private Button convert_button;
     private ApiService service;
     private String symbol;
@@ -61,55 +63,63 @@ public class ConversorFragment extends Fragment {
 
         service = retrofit.create(ApiService.class);
 
-        vt_input_currency = (EditText) view.findViewById(R.id.input_currency);
         vt_input_value = (EditText) view.findViewById(R.id.input_value);
         vt_output_value = (TextView) view.findViewById(R.id.output_value);
-        vt_output_currency = (EditText) view.findViewById(R.id.output_currency);
+        vt_input_currency = (Spinner) view.findViewById(R.id.input_currency);
+        vt_output_currency = (Spinner) view.findViewById(R.id.output_currency);
+        vt_input_currency.setAdapter(new ApiAdapter(getContext(), avaliableRates));
+        vt_output_currency.setAdapter(new ApiAdapter(getContext(), avaliableRates));
 
-        vt_input_value.setText("1");
-        vt_input_currency.setText("EUR");
-        vt_output_currency.setText("USD");
-
-        // FIXME: 04/02/16 NullPointer, revisar variables
         convert_button = (Button) view.findViewById(R.id.convert_button);
         convert_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Get user inputs
-                base = vt_input_currency.getText().toString();
-                symbol = vt_output_currency.getText().toString();
-                input_value = Double.valueOf(vt_input_value.getText().toString());
+                base = vt_input_currency.getSelectedItem().toString();
+                symbol = vt_output_currency.getSelectedItem().toString();
+
+                // If there is a wrong format number, don't continue
+                try {
+                    input_value = Double.valueOf(vt_input_value.getText().toString());
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getContext(), "Write a value first", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                /* If the conversion is between the same currency, the result it is obvious. Also
+                the query will fail. */
+                if (base.equals(symbol)) {
+                    vt_output_value.setText(vt_input_value.getText().toString());
+                    return;
+                }
+                // Clear last result
+                vt_output_value.setText("Connecting...");
 
                 // Do the query
                 Call<JsonObject> call = service.getConversion(base);
-
-//                Call<JsonObject> call = service.getLatestExchange();
                 call.enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Response<JsonObject> response) {
                         JsonObject body = response.body();
                         Log.d("ConversorFragment", "body" + body);
-
                         JsonObject rates = body.get("rates").getAsJsonObject();
                         float rate = rates.get(symbol).getAsFloat();
-
-                        double result = input_value * rate;
-                        vt_output_value.setText(String.valueOf(result));
-//                        listView.setAdapter(new ApiAdapter(ConversorFragment.this, array));
+                        vt_output_value.setText(String.valueOf(input_value * rate));
                     }
 
                     @Override
                     public void onFailure(Throwable t) {
                         Log.d("ConversorFragment", "error: " + t.getMessage());
-                        Toast.makeText(getContext(), "Error on getting the data, try another time", Toast.LENGTH_SHORT);
-
+                        if (t.getMessage() != null) {
+//                            Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Connection failed! Try another time", Toast.LENGTH_SHORT).show();
+                        }
+                        vt_output_value.setText("");
                     }
                 });
 
             }
         });
-
-
 
 
     }

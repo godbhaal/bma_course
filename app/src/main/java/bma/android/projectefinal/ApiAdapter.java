@@ -1,40 +1,70 @@
-/*
 package bma.android.projectefinal;
 
-*/
-/**
- * Created by jon on 04/02/16.
- *//*
-
-
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+/**
+ * Created by jon on 04/02/16.
+ */
+public class ApiAdapter implements SpinnerAdapter {
 
-public class ApiAdapter extends BaseAdapter {
+    private final Context context;
+    private final int resId;
+    private final String[] titles;
 
-    Context context;
-    JsonArray array;
-
-    public ApiAdapter(Context context, JsonArray array) {
+    public ApiAdapter(Context context, String[] titles) {
         this.context = context;
-        this.array = array;
+        this.resId = R.layout.my_spinner;
+        this.titles = titles;
+    }
+
+    @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        return getCustomView(position, convertView, parent);
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        return getCustomView(position, convertView, parent);
+    }
+
+    private View getCustomView(int position, View convertView, ViewGroup parent) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(resId, parent, false);
+        TextView tv_title = (TextView) view.findViewById(R.id.textView_spinner);
+        tv_title.setText(titles[position]);
+
+        return view;
     }
 
     @Override
     public int getCount() {
-        return array.size();
+        return titles.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return array.get(position).getAsJsonObject();
+        return titles[position];
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 1;
+    }
+
+    @Override
+    public void registerDataSetObserver(DataSetObserver observer) {
+
+    }
+
+    @Override
+    public void unregisterDataSetObserver(DataSetObserver observer) {
+
     }
 
     @Override
@@ -43,21 +73,18 @@ public class ApiAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.api_adapter_element, parent, false);
-        TextView textView_streetName = (TextView) view.findViewById(R.id.streetName);
-        TextView textView_bikes = (TextView) view.findViewById(R.id.numberOfBikes);
-        TextView textView_status = (TextView) view.findViewById(R.id.status);
-        JsonObject station = array.get(position).getAsJsonObject();
-        String stationName = station.get("streetName").getAsString();
-        String numberOfBikes = station.get("bikes").getAsString();
-        String status = station.get("status").getAsString();
-
-        textView_streetName.setText(stationName);
-        textView_bikes.setText(numberOfBikes);
-        textView_status.setText(status);
-        return view;
+    public boolean hasStableIds() {
+        return false;
     }
-}*/
+
+    @Override
+    public int getItemViewType(int position) {
+        return 0;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+}
+
