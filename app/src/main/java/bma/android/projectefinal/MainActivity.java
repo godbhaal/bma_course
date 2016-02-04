@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity
     private FragmentTransaction ft;
     private CalculadoraFragment calculadoraFragment;
     private FloatingActionButton fab;
+    private ConversorFragment conversorFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,16 +92,20 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
+
         if (id == R.id.nav_calculator) {
-            fm = getSupportFragmentManager();
             calculadoraFragment = CalculadoraFragment.newInstance();
-            ft = fm.beginTransaction();
             ft.replace(R.id.fragment_container_main, calculadoraFragment);
-            ft.commit();
-            fab.hide();
         } else if (id == R.id.nav_conversor) {
+            conversorFragment = ConversorFragment.newInstance();
+            ft.replace(R.id.fragment_container_main, conversorFragment);
         } else if (id == R.id.nav_audio) {
         }
+
+        ft.commit();
+        fab.hide();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

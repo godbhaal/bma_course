@@ -3,4 +3,68 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/conversor_fragment_title"
+        android:id="@+id/conversor_title"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="1">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:hint="Input Value"
+            android:id="@+id/input_value"
+            android:layout_gravity="center"
+            android:textSize="20sp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/input_currency"
+            android:hint="Select"
+            android:layout_gravity="center"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:hint="OutputValue"
+            android:ems="10"
+            android:layout_gravity="center"
+            android:id="@+id/output_value"
+            android:inputType="number"
+            android:textSize="20sp" />
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/output_currency"
+            android:layout_gravity="center"
+            android:hint="Select"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+
 </LinearLayout>
