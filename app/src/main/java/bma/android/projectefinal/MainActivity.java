@@ -110,7 +110,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_conversor) {
             conversorFragment = ConversorFragment.newInstance();
             ft.replace(R.id.fragment_container_main, conversorFragment);
-        } else if (id == R.id.nav_audio) {
         }
 
         ft.commit();
