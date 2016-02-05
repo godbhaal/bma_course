@@ -18,6 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+// Model-View-Controler recommanat. XML es el View, el Fragment es el controler.
+
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -52,6 +55,12 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
+        InitialFragment initialFragment = InitialFragment.newInstance();
+        ft.replace(R.id.fragment_container_main, initialFragment);
+        ft.commit();
+        fab.hide();
     }
 
     @Override

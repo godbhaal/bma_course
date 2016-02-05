@@ -15,5 +15,9 @@ public interface ApiService {
 
     @GET("latest")
     public Call<JsonObject> getConversion(@Query("base") String currency_base_name);
+
+    // Més òptim desde el punt de vista de descàrrega de dades
+    @GET("latest")
+    public Call<JsonObject> getConversion2(@Query("base") String currency_base_name, @Query("symbols") String currency_wanted_name);
 }
 

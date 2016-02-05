@@ -96,7 +96,8 @@ public class ConversorFragment extends Fragment {
                 vt_output_value.setText("Connecting...");
 
                 // Do the query
-                Call<JsonObject> call = service.getConversion(base);
+//                Call<JsonObject> call = service.getConversion(base);
+                Call<JsonObject> call = service.getConversion2(base, symbol);
                 call.enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Response<JsonObject> response) {
