@@ -30,41 +30,6 @@ public class MainActivity extends AppCompatActivity {
         rbDona = (RadioButton) findViewById(R.id.radioButton_dona);
 
         // Gestionar botons
-        buttonGuardar = (Button) findViewById(R.id.buttonGuardar);
-        buttonGuardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Persona persona = getPersona();
-                // Es crea la base de dades, s'actualitza.. el que faci falta
-                PersistenciaDBHelper mDbHelper = new PersistenciaDBHelper(MainActivity.this);
-                // Aconseguir la database
-                SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(Persona.PersonaEntry.COLUMN_NAME_NAME, persona.getNom());
-                contentValues.put(Persona.PersonaEntry.COLUMN_NAME_SURNAME, persona.getCognoms());
-                contentValues.put(Persona.PersonaEntry.COLUMN_NAME_AGE, persona.getEdat());
-                contentValues.put(Persona.PersonaEntry.COLUMN_NAME_ES_HOME, persona.esHome());
-
-                try {
-                    /* El tercer parametre sempre a null. contentValues es la informacio de la fila
-                    de la db, (hi havia un camp que era KEY) si fem servir inserOrThrow saltarà
-                    una exception quan vulguem introduir una persona amb el mateix nom */
-                    db.insertOrThrow(Persona.PersonaEntry.TABLE_NAME, null, contentValues);
-                } catch (SQLiteConstraintException e) {
-                    Toast.makeText(MainActivity.this, "User already exists", Toast.LENGTH_SHORT).show();
-
-                    /*String whereClause = Persona.PersonaEntry.COLUMN_NAME_NAME + " LIKE ?";
-                    String[] whereArgs = { persona.getNom() };
-                    db.update (
-                        Persona.PersonaEntry.TABLE_NAME,
-                        contentValues,
-                        whereClause,
-                        whereArgs
-                    ); */
-                }
-            }
-        });
 
         buttonCargar = (Button) findViewById(R.id.buttonCargar);
         buttonCargar.setOnClickListener(new View.OnClickListener() {
@@ -104,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-/*        buttonUpdate = (Button) findViewById(R.id.buttonUpdate);
-        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+        buttonGuardar = (Button) findViewById(R.id.buttonGuardar);
+        buttonGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Persona persona = getPersona();
@@ -121,25 +86,76 @@ public class MainActivity extends AppCompatActivity {
                 contentValues.put(Persona.PersonaEntry.COLUMN_NAME_ES_HOME, persona.esHome());
 
                 try {
-                    *//* El tercer parametre sempre a null. contentValues es la informacio de la fila
+                    /* El tercer parametre sempre a null. contentValues es la informacio de la fila
                     de la db, (hi havia un camp que era KEY) si fem servir inserOrThrow saltarà
-                    una exception quan vulguem introduir una persona amb el mateix nom *//*
-//                    db.insertOrThrow(Persona.PersonaEntry.TABLE_NAME, null, contentValues);
-                    db.replaceOrThrow(Persona.PersonaEntry.TABLE_NAME, null, contentValues);
+                    una exception quan vulguem introduir una persona amb el mateix nom */
+                    db.insertOrThrow(Persona.PersonaEntry.TABLE_NAME, null, contentValues);
                 } catch (SQLiteConstraintException e) {
-                    Toast.makeText(MainActivity.this, "Cannot update!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "User already exists", Toast.LENGTH_SHORT).show();
 
-                    *//*String whereClause = Persona.PersonaEntry.COLUMN_NAME_NAME + " LIKE ?";
+                    /*String whereClause = Persona.PersonaEntry.COLUMN_NAME_NAME + " LIKE ?";
                     String[] whereArgs = { persona.getNom() };
                     db.update (
                         Persona.PersonaEntry.TABLE_NAME,
                         contentValues,
                         whereClause,
                         whereArgs
-                    ); *//*
+                    ); */
                 }
             }
-        });*/
+        });
+
+        buttonUpdate = (Button) findViewById(R.id.buttonUpdate);
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Persona persona = getPersona();
+                // Es crea la base de dades, s'actualitza.. el que faci falta
+                PersistenciaDBHelper mDbHelper = new PersistenciaDBHelper(MainActivity.this);
+                // Aconseguir la database
+                SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+                // Nou valor
+                ContentValues values = new ContentValues();
+                values.put(Persona.PersonaEntry.COLUMN_NAME_AGE, persona.getEdat());
+                values.put(Persona.PersonaEntry.COLUMN_NAME_SURNAME, persona.getCognoms());
+
+                // Selecciona quina fila actualitzar segons la ID
+                String selection = Persona.PersonaEntry.COLUMN_NAME_NAME + " LIKE ?";
+                String[] selectionArgs = {persona.getNom()};
+
+                // Fer query (Issue SQL statement)
+                int count = db.update(
+                        Persona.PersonaEntry.TABLE_NAME,
+                        values,
+                        selection,
+                        selectionArgs);
+            }
+        });
+
+
+        buttonDelete = (Button) findViewById(R.id.buttonDelete);
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Persona persona = getPersona();
+                PersistenciaDBHelper mDbHelper = new PersistenciaDBHelper(MainActivity.this);
+                SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+                // Definir on
+                String selection = Persona.PersonaEntry.COLUMN_NAME_NAME + " LIKE ?";
+                // Especifica arguments (Specify arguments in placeholder order)
+                String[] selectionArgs = {persona.getNom()};
+
+                // Fer query (Issue SQL statement)
+                int count = db.delete(
+                        Persona.PersonaEntry.TABLE_NAME,
+                        selection,
+                        selectionArgs
+                );
+            }
+        });
+
 
     }
 
