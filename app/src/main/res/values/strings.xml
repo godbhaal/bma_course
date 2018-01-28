@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">BMA_Final</string>
+    <string name="app_title">BMA Projecte Final</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="calc_title">Calculator</string>
+    <string name="conversor_title">Conversor</string>
+    <string name="audio_title">Audio</string>
+    <string name="nav_subtitle">Jonatan Poveda</string>
+    <string name="calc_advanced">Advanced</string>
+    <string name="calc_type_basic">Calculadora Basica</string>
+    <string name="calc_type_advanced">Calculadora Avançada</string>
+    <string name="initial_message_on_calc_display">Type</string>
+    <string name="conversor_fragment_title">Currency conversor</string>
+    <string name="convert_button">Convert!</string>
+    <string name="initial_message">Selecciona una aplicació desde el menú desplegable de l\'esquerra</string>
+    <string name="initial_title">Projecte Final del Curs BMA d\'Android</string>
+</resources>
